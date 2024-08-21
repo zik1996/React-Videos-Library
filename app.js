@@ -9,7 +9,7 @@ const userRoutes = require("./routes/users")
 const adminRoutes = require("./routes/admin")
 
 const app = express();
-constr = process.env.MONGO_URI;
+MONGO_URI = process.env.MONGO_URI;
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,7 +22,7 @@ app.use(categoryRoutes)
 app.use(userRoutes)
 app.use(adminRoutes)
 
-mongoose.connect(constr)
+mongoose.connect(MONGO_URI)
 .then(()=>{
     console.log("Data base connected")
 })
