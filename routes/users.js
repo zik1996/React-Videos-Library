@@ -5,6 +5,9 @@ const userController = require("../controllers/users")
 
 router.get("/users", userController.getUsers)
 
-router.post("/add-users", userController.postUser)
+//GET => Get single video
+router.get("/user/:id", userController.getUser)
+
+router.post("/adduser", userController.postUser)
 
 module.exports = router;

@@ -21,12 +21,21 @@ exports.postCategory = (req, res)=>{
 
     category.save()
     .then((result)=>{
-        res.json({
-            message:"category Added Successfully",
-            categories : result
-        })
+       res.send(result)
     })
     .catch(err=>{
         console.log(err)
     })
 }
+
+exports.getCategory = (req, res, next)=>{
+    let id = parseInt(req.params.id);
+    Category.find({Category_Id:id})
+    .then(result=>{
+      res.send(result)
+    })
+    .then(err=>{
+     console.log(err)
+    })
+  }
+  

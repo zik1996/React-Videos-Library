@@ -16,6 +16,9 @@ const videoSchema = new Schema({
     Comments :{
         type: String
     },
+    Likes : {
+        type: Number
+    },
     Category_Id :{
         type: Number
     }

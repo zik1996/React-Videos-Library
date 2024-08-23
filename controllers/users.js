@@ -14,33 +14,30 @@ exports.getUsers = (req, res, next) => {
 };
 
 exports.postUser = (req, res) => {
-  bcrypt.hash(req.body.password, 10, (err, hashedPass) => {
+  bcrypt.hash(req.body.Password, 10, (err, hashedPass) => {
     if (err) {
       res.json({
         message: err,
       });
     } else {
-      const userId = req.body.userId;
-      const userName = req.body.userName;
-      const password = hashedPass;
-      const email = req.body.email;
-      const mobile = req.body.mobile;
+      const UserId = req.body.UserId;
+      const UserName = req.body.UserName;
+      const Password = hashedPass;
+      const Email = req.body.Email;
+      const Mobile = req.body.Mobile;
 
       const user = new User({
-        userId: userId,
-        userName: userName,
-        password: password,
-        email: email,
-        mobile: mobile,
+        UserId: UserId,
+        UserName: UserName,
+        Password: Password,
+        Email: Email,
+        Mobile: Mobile
       });
 
       user
         .save()
         .then((result) => {
-          res.json({
-            message: "user Added Successfully",
-            Users: result,
-          });
+          res.send(result)
         })
         .catch((err) => {
           console.log(err);
@@ -48,3 +45,14 @@ exports.postUser = (req, res) => {
     }
   });
 };
+
+exports.getUser = (req, res, next)=>{
+  let id = req.params.id;
+  User.find({UserId:id})
+  .then(result=>{
+    res.send(result)
+  })
+  .then(err=>{
+    res.send(err)
+  })
+}
