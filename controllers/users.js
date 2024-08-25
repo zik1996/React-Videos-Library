@@ -56,3 +56,32 @@ exports.getUser = (req, res, next)=>{
     res.send(err)
   })
 }
+
+exports.userLogin = (req, res, next)=>{
+  let UserId = req.body.UserId;
+  let Password = req.body.Password;
+
+  User.findOne({UserId : UserId})
+  .then(user=>{
+    if(user){
+      bcrypt.compare(Password, user.Password, (err, result)=>{
+          if(err){
+              res.json({
+                  error:err
+              })
+          }
+          if(result){
+              let token = jwt.sign({UserName:user.UserName}, "verySecretValue", {expiresIn:"1hr"})
+              res.json({
+                  message:"Login Successfully",
+                  token: token
+              })
+          }else{
+              res.json({
+                  message:"Password does not match"
+              })
+          }
+      })
+    }
+  })
+}
