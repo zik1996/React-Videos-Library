@@ -8,6 +8,7 @@ router.get("/users", userController.getUsers)
 //GET => Get single video
 router.get("/user/:id", userController.getUser)
 
+// Add File Using Multer Option
 router.post("/adduser", userController.postUser)
 
 module.exports = router;
